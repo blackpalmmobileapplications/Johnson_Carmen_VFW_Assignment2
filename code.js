@@ -110,4 +110,51 @@ function validate() {																						// METHOD FUNCTION
 	else if (cat == "First Aid")																			// CONDITIONAL
 		targetArray = firstaid;																					// MATH
 	else if (cat == "Miscellaneous")																		// CONDITIONAL
-		targetArray = miscellaneous;  
+		targetArray = miscellaneous;
+		
+		
+	if ( el('name').value == "" || el('quantity').value == "" || el('comments').value == "" || el('date').value == "" )			// CONDITIONAL
+		alert('All fields are required!');																						// OUTPUT
+	else if ( targetArray.indexOf(el('name').value.toLowerCase()) == -1 ) {														// CONDITIONAL
+		option = confirm("Err..the item you entered doesn't seem like one required for a camping trip. Add it anyway?");		// MATH
+		if (option == true)																										// CONDITIONAL
+			update();																											// METHOD FUNC CALL
+	}
+	else update();																												// METHOD FUNC CALL
+};
+
+function clearlist() {																						// METHOD FUNCTION
+	var option = confirm("Are you sure you want to clear the entire list?");								// MATH
+	if (option) {																							// CONDITIONAL
+		var len = itemsArray.length;																		// LOCAL VARIABLE
+		for (i=0; i<len; i++) {																				// FOR LOOP
+			var temp = itemsArray.pop();																		// LOCAL VAR & MATH
+		}
+		display();																							// METHOD FUNC CALL
+	}
+}
+
+function resetIndexes() {																					// METHOD FUNCTION
+	var len = itemsArray.length;																			// LOCAL VARIABLE
+	for (i=0; i<len; i++) {																					// FOR LOOP
+		itemsArray[i]['idno'] = i;																			// MATH
+	}
+}
+
+function deleteItem(idno) {																					// METHOD FUNCTION
+	var option = confirm("Delete Item?");																	// MATH
+	if (option) {																							// CONDITIONAL
+		itemsArray.splice(idno, 1);																			// MATH
+		resetIndexes();																						// METHOD FUNC CALL
+		display();																							// METHOD FUNC CALL
+	}
+}
+
+function editItem(idno) {																					// METHOD FUNC 
+	el('category').value = itemsArray[idno]['category'];													// MATH
+	el('name').value = itemsArray[idno]['name'];															// MATH
+	el('quantity').value = itemsArray[idno]['quantity'];													// MATH
+	el('comments').value = itemsArray[idno]['comments'];													// MATH
+	el('date').value = itemsArray[idno]['date'];															// MATH
+	el('important').value = itemsArray[idno]['important'];													// MATH
+}	  
