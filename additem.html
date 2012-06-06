@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html" />
+	<meta name="keywords" content="camping list, camping checklist, checklist app" />
+	<meta name="description" content="This app enables you to make sure that you're taking every single item required on a camping check-list" />
+	<meta name="robots" content="INDEX, FOLLOW" />
+	<title>Add Item</title>
+	<link rel="stylesheet" href="style.css" />
+	<script type="text/javascript" src="code.js"></script>
+</head>
+<body>
+	<header>
+		<h1>ListCheck</h1>
+		<p>This app enables you to make sure that you're taking every single item required on a camping check-list.</p>
+	</header>
+	<form action="#" method="POST">
+		<fieldset>
+			<legend>Add Item</legend>
+			<label for="category">Select Cateogory</label>
+			<select name="category" id="category">
+				<option value="Shelter">Shelter</option>
+				<option value="Bedding">Bedding</option>
+				<option value="Cooking">Cooking</option>
+				<option value="Clothing">Clothing</option>
+				<option value="First Aid">First Aid</option>
+				<option value="Miscellaneous">Miscellaneous</option>
+			</select><br />
+			<label for="name">Name: </label><input type="text" name="name" id="name" /><br />
+			<label for="quantity">Quantity: </label><input type="range" name="quantity" id="quantity" min="1" max="10" value="1" /><br />
+			<label for="date">Purchase By: </label><input type="date" name="date" id="date" /><br />
+			<label for="important">Important? </label><input type="checkbox" name="important" id="important" /><br />
+			<label for="comments">Comments: </label><textarea name="comments" id="comments" cols="30" rows="10"></textarea><br />
+			<input type="button" id="button" value="Add Item!" />
+		</fieldset>
+	</form>
+	
+	<div id="listbox">
+		
+	</div>
+	<a class="button" id="clearButton" >Clear Local Storage</a>
+	
+</body>
+</html>
