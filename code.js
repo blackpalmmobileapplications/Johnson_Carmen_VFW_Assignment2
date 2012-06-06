@@ -43,4 +43,71 @@ var miscellaneous = ["funds", "games", "mp3 player", "gps", "books", "radio"];
 function para(field, val) {																			// METHOD FUNCTION
 	return "<p>" + "<strong>" + field + ": </strong>" + val + "</p>";								// RETURN STRING
 }
-  
+
+function clearForm() {																				// METHOD FUNCTION
+	el('name').value = "";																			// MATH
+	el('quantity').value = "1";																		// MATH
+	el('comments').value = "";																		// MATH
+	el('date').value = "";
+	el('important').checked = false;
+}
+
+function display() {																						// METHOD FUNCTION
+	var text = "";																							// LOCAL VARIABLE
+	var len = itemsArray.length;																			// LOCAL VARIABLE & MATH
+	
+	for (i=0; i<len; i++) {																					// FOR LOOP
+		text += "<div class='listitem'>" + 																	// MATH - (multi line statement)
+				para("Category", itemsArray[i]['category']) + 
+				para("Name", itemsArray[i]['name']) + 
+				para("Quantity", itemsArray[i]['quantity']) + 
+				para("Purchase By", itemsArray[i]['date']) +
+				para("Important", itemsArray[i]['important']) +
+				para("Comments", itemsArray[i]['comments']) + 
+				"<a class='button' onclick='deleteItem("+ itemsArray[i]['idno'] +");'>Delete Item</a>" +
+				"<a class='button' onclick='editItem("+ itemsArray[i]['idno'] +");'>Edit Item</a>" + 
+				"</div>";
+	}
+	el('listbox').innerHTML = text;																			// MATH
+}
+
+var update = function() {																					// METHOD FUNCTION
+	// LOCAL VARIABLE
+	var obj = { category:el('category').value, name:el('name').value, 
+				quantity:el('quantity').value, comments:el('comments').value, 
+				idno:items, date:el('date').value, important:el('important').checked };
+	var len = itemsArray.length;																			// LOCAL VAR
+	var notAlreadyThere = true;																				// LOCAL VAR
+	for (i=0; i<len; i++) {																											// FOR LOOP
+		if (obj['name'].toLowerCase() == itemsArray[i]['name'].toLowerCase() && obj['category'] == itemsArray[i]['category']) {		// CONDITIONAL
+			itemsArray[i]['quantity'] = obj['quantity'];																			// MATH
+			itemsArray[i]['date'] = obj['date'];
+			itemsArray[i]['important'] = obj['important'];
+			itemsArray[i]['comments'] = obj['comments'];																			// MATH
+			notAlreadyThere = false;																								// MATH
+		}
+	}
+	if (notAlreadyThere) {																					// CONDITIONAL
+		itemsArray.push(obj);																				// MATH
+		clearForm();																						// METHOD - FUNCTION CALL
+		items++;																							// MATH
+	}
+	display();																								// METHOD FUNCTION CALL
+};
+
+function validate() {																						// METHOD FUNCTION 
+	var targetArray;																						// LOCAL VARIABLE
+	var option;																								// LOCAL VAR
+	var cat = el('category').value;																			// LOCAL VAR
+	if (cat == "Shelter")																					// CONDITIONAL
+		targetArray = shelter;																					// MATH
+	else if (cat == "Bedding")																				// CONDITIONAL
+		targetArray = bedding;																					// MATH
+	else if (cat == "Cooking")																				// CONDITIONAL
+		targetArray = cooking;																					// MATH
+	else if (cat == "Clothing")																				// CONDITIONAL
+		targetArray = clothing;																					// MATH
+	else if (cat == "First Aid")																			// CONDITIONAL
+		targetArray = firstaid;																					// MATH
+	else if (cat == "Miscellaneous")																		// CONDITIONAL
+		targetArray = miscellaneous;  
